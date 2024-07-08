@@ -38,10 +38,9 @@
             width: 100%;
             padding: 10px;
             font-size: 1.2em;
-            border: none;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            background-color: #007bff;
-            color: white;
+            color: black;
             cursor: pointer;
             transition: background-color 0.3s;
         }
@@ -120,7 +119,29 @@
         }
         .zoom-buttons button {
             margin: 0 10px;
-        }
+        }		
+        /* Hintergrundfarben für Artikel */
+        .item-gyros-pommes { background-color: #FFFFFF; }
+        .item-gyros-wecken { background-color: #DF7401; }
+        .item-maultaschen { background-color: #0101DF; }
+        .item-steak-pommes { background-color: #0101DF; }
+        .item-steak-wecken { background-color: #8A4B08; }
+        .item-currywurst-pommes { background-color: #DF7401; }
+        .item-currywurst-wecken { background-color: #00FF00; }
+        .item-wurst-wecken { background-color: #FF0000; }
+        .item-pommes { background-color: #FFFF00; }
+        .item-pfand { background-color: #FFBF00; }
+        /* Hintergrundfarben für Bestellung */
+        .order-gyros-pommes { background-color: #FFFFFF; }
+        .order-gyros-wecken { background-color: #DF7401; }
+        .order-maultaschen { background-color: #0101DF; }
+        .order-steak-pommes { background-color: #0101DF; }
+        .order-steak-wecken { background-color: #8A4B08; }
+        .order-currywurst-pommes { background-color: #DF7401; }
+        .order-currywurst-wecken { background-color: #00FF00; }
+        .order-wurst-wecken { background-color: #FF0000; }
+        .order-pommes { background-color: #FFFF00; }
+        .order-pfand { background-color: #FFBF00; }
     </style>
 </head>
 <body>
@@ -128,57 +149,52 @@
         <div class="item-list-container">
             <div class="item-list" id="itemList">
                 <div class="item">
-                    <button onclick="addItem('Gyros mit Pommes, Zaziki und Weißkrautsalat', 9.00)">
+                    <button class="item-gyros-pommes" onclick="addItem('Gyros mit Pommes, Zaziki und Weißkrautsalat', 9.00, 'order-gyros-pommes')">
                         Gyros mit Pommes, Zaziki und Weißkrautsalat - €9.00
                     </button>
                 </div>
                 <div class="item">
-                    <button onclick="addItem('Gyros mit Wecken, Zaziki und Weißkrautsalat', 7.00)">
+                    <button class="item-gyros-wecken" onclick="addItem('Gyros mit Wecken, Zaziki und Weißkrautsalat', 7.00, 'order-gyros-wecken')">
                         Gyros mit Wecken, Zaziki und Weißkrautsalat - €7.00
                     </button>
                 </div>
                 <div class="item">
-                    <button onclick="addItem('Vegetarische Maultaschen mit Kartoffelsalat', 8.00)">
+                    <button class="item-maultaschen" onclick="addItem('Vegetarische Maultaschen mit Kartoffelsalat', 8.00, 'order-maultaschen')">
                         Vegetarische Maultaschen mit Kartoffelsalat - €8.00
                     </button>
                 </div>
                 <div class="item">
-                    <button onclick="addItem('Steak mit Pommes oder Kartoffelsalat', 8.00)">
+                    <button class="item-steak-pommes" onclick="addItem('Steak mit Pommes oder Kartoffelsalat', 8.00, 'order-steak-pommes')">
                         Steak mit Pommes oder Kartoffelsalat - €8.00
                     </button>
                 </div>
                 <div class="item">
-                    <button onclick="addItem('Steak im Wecken', 5.00)">
+                    <button class="item-steak-wecken" onclick="addItem('Steak im Wecken', 5.00, 'order-steak-wecken')">
                         Steak im Wecken - €5.00
                     </button>
                 </div>
                 <div class="item">
-                    <button onclick="addItem('Currywurst mit Pommes', 7.00)">
+                    <button class="item-currywurst-pommes" onclick="addItem('Currywurst mit Pommes', 7.00, 'order-currywurst-pommes')">
                         Currywurst mit Pommes - €7.00
                     </button>
                 </div>
                 <div class="item">
-                    <button onclick="addItem('Currywurst mit Wecken', 4.50)">
+                    <button class="item-currywurst-wecken" onclick="addItem('Currywurst mit Wecken', 4.50, 'order-currywurst-wecken')">
                         Currywurst mit Wecken - €4.50
                     </button>
                 </div>
                 <div class="item">
-                    <button onclick="addItem('Rote/Weiße Wurst im Wecken', 4.00)">
+                    <button class="item-wurst-wecken" onclick="addItem('Rote/Weiße Wurst im Wecken', 4.00, 'order-wurst-wecken')">
                         Rote/Weiße Wurst im Wecken - €4.00
                     </button>
                 </div>
                 <div class="item">
-                    <button onclick="addItem('Portion Pommes', 3.00)">
-                        Portion Pommes - €3.00
+                    <button class="item-pommes" onclick="addItem('Portion Pommes oder Kartoffelsalat', 3.00, 'order-pommes')">
+                        Portion Pommes oder Kartoffelsalat - €3.00
                     </button>
                 </div>
                 <div class="item">
-                    <button onclick="addItem('Portion Kartoffelsalat', 3.00)">
-                        Portion Kartoffelsalat - €3.00
-                    </button>
-                </div>
-                <div class="item">
-                    <button onclick="addItem('Speiseteller inkl. Besteck', 3.00)">
+                    <button class="item-pfand" onclick="addItem('Speiseteller inkl. Besteck', 3.00, 'order-pfand')">
                         Speiseteller inkl. Besteck - €3.00
                     </button>
                 </div>
@@ -202,12 +218,12 @@
         let order = [];
         let zoomLevel = 1;
 
-        function addItem(name, price) {
+        function addItem(name, price, vis) {
             const existingItem = order.find(item => item.name === name);
             if (existingItem) {
                 existingItem.quantity++;
             } else {
-                order.push({ name, price, quantity: 1 });
+                order.push({ name, price, vis, quantity: 1 });
             }
             updateOrder();
         }
@@ -233,7 +249,7 @@
             order.forEach(item => {
                 total += item.price * item.quantity;
                 const orderItem = document.createElement('div');
-                orderItem.className = 'order-item';
+                orderItem.className = `order-item ${item.vis}`;
                 orderItem.innerHTML = `
                     <div class="order-item-name">${item.name}</div>
                     <div class="order-item-quantity">${item.quantity}</div>
