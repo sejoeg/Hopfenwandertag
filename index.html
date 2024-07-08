@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hopfenwandertag 2024 - Essenskasse</title>
+    <title>Restaurantkasse</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
             margin: 0;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
         }
         .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: row;
+            max-width: 1200px;
+            width: 100%;
+            background-color: #fff;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .item-list-container, .order-list-container {
+            flex: 1;
+            padding: 20px;
         }
         .item-list {
             margin-bottom: 20px;
@@ -82,6 +92,8 @@
             font-size: 1.5em;
             text-align: right;
             font-weight: bold;
+            margin-left: auto;
+            margin-right: 20px;
         }
         .reset-button {
             background-color: #dc3545;
@@ -95,82 +107,97 @@
             align-items: center;
             margin-bottom: 20px;
         }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .zoom-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .zoom-buttons button {
+            margin: 0 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Hopfenwandertag 2024 - Essenskasse</h1>
-
-        <div class="controls">
-            <div class="order-total" id="orderTotalTop">Gesamt: €0.00</div>
-            <button class="reset-button" onclick="resetOrder()">Neu</button>
+        <div class="item-list-container">
+            <h2>Verfügbare Artikel</h2>
+            <div class="item-list" id="itemList">
+                <div class="item">
+                    <button onclick="addItem('Gyros mit Pommes, Zaziki und Weißkrautsalat', 9.00)">
+                        Gyros mit Pommes, Zaziki und Weißkrautsalat - €9.00
+                    </button>
+                </div>
+                <div class="item">
+                    <button onclick="addItem('Gyros mit Wecken, Zaziki und Weißkrautsalat', 7.00)">
+                        Gyros mit Wecken, Zaziki und Weißkrautsalat - €7.00
+                    </button>
+                </div>
+                <div class="item">
+                    <button onclick="addItem('Vegetarische Maultaschen mit Kartoffelsalat', 8.00)">
+                        Vegetarische Maultaschen mit Kartoffelsalat - €8.00
+                    </button>
+                </div>
+                <div class="item">
+                    <button onclick="addItem('Steak mit Pommes oder Kartoffelsalat', 8.00)">
+                        Steak mit Pommes oder Kartoffelsalat - €8.00
+                    </button>
+                </div>
+                <div class="item">
+                    <button onclick="addItem('Steak im Wecken', 5.00)">
+                        Steak im Wecken - €5.00
+                    </button>
+                </div>
+                <div class="item">
+                    <button onclick="addItem('Currywurst mit Pommes', 7.00)">
+                        Currywurst mit Pommes - €7.00
+                    </button>
+                </div>
+                <div class="item">
+                    <button onclick="addItem('Currywurst mit Wecken', 4.50)">
+                        Currywurst mit Wecken - €4.50
+                    </button>
+                </div>
+                <div class="item">
+                    <button onclick="addItem('Rote/Weiße Wurst im Wecken', 4.00)">
+                        Rote/Weiße Wurst im Wecken - €4.00
+                    </button>
+                </div>
+                <div class="item">
+                    <button onclick="addItem('Portion Pommes', 3.00)">
+                        Portion Pommes - €3.00
+                    </button>
+                </div>
+                <div class="item">
+                    <button onclick="addItem('Portion Kartoffelsalat', 3.00)">
+                        Portion Kartoffelsalat - €3.00
+                    </button>
+                </div>
+            </div>
+            <div class="zoom-buttons">
+                <button onclick="zoomIn()">+</button>
+                <button onclick="zoomOut()">-</button>
+            </div>
         </div>
 
-        <h2>Gerichte</h2>
-        <div class="item-list" id="itemList">
-            <div class="item">
-                <button onclick="addItem('Gyros mit Pommes, Zaziki und Weißkrautsalat', 9.00)">
-                    Gyros mit Pommes, Zaziki und Weißkrautsalat - €9.00
-                </button>
+        <div class="order-list-container">
+            <div class="header">
+                <h2>Bestellung</h2>
+                <div class="order-total" id="orderTotalTop">Gesamt: €0.00</div>
+                <button class="reset-button" onclick="resetOrder()">Neu</button>
             </div>
-            <div class="item">
-                <button onclick="addItem('Gyros mit Wecken, Zaziki und Weißkrautsalat', 7.00)">
-                    Gyros mit Wecken, Zaziki und Weißkrautsalat - €7.00
-                </button>
-            </div>
-            <div class="item">
-                <button onclick="addItem('Vegetarische Maultaschen mit Kartoffelsalat', 8.00)">
-                    Vegetarische Maultaschen mit Kartoffelsalat - €8.00
-                </button>
-            </div>
-            <div class="item">
-                <button onclick="addItem('Steak mit Pommes oder Kartoffelsalat', 8.00)">
-                    Steak mit Pommes oder Kartoffelsalat - €8.00
-                </button>
-            </div>
-            <div class="item">
-                <button onclick="addItem('Steak im Wecken', 5.00)">
-                    Steak im Wecken - €5.00
-                </button>
-            </div>
-            <div class="item">
-                <button onclick="addItem('Currywurst mit Pommes', 7.00)">
-                    Currywurst mit Pommes - €7.00
-                </button>
-            </div>
-            <div class="item">
-                <button onclick="addItem('Currywurst mit Wecken', 4.50)">
-                    Currywurst mit Wecken - €4.50
-                </button>
-            </div>
-            <div class="item">
-                <button onclick="addItem('Rote/Weiße Wurst im Wecken', 4.00)">
-                    Rote/Weiße Wurst im Wecken - €4.00
-                </button>
-            </div>
-            <div class="item">
-                <button onclick="addItem('Portion Pommes', 3.00)">
-                    Portion Pommes - €3.00
-                </button>
-            </div>
-            <div class="item">
-                <button onclick="addItem('Portion Kartoffelsalat', 3.00)">
-                    Portion Kartoffelsalat - €3.00
-                </button>
-            </div>
-        </div>
-
-        <h2>Bestellung</h2>
-        <div class="order-list" id="orderList"></div>
-
-        <div class="controls">
-            <div class="order-total" id="orderTotalBottom">Gesamt: €0.00</div>
-            <button class="reset-button" onclick="resetOrder()">Neu</button>
+            <div id="orderList"></div>
         </div>
     </div>
 
     <script>
         let order = [];
+        let zoomLevel = 1;
 
         function addItem(name, price) {
             const existingItem = order.find(item => item.name === name);
@@ -214,12 +241,21 @@
             });
 
             document.getElementById('orderTotalTop').innerText = `Gesamt: €${total.toFixed(2)}`;
-            document.getElementById('orderTotalBottom').innerText = `Gesamt: €${total.toFixed(2)}`;
         }
 
         function resetOrder() {
             order = [];
             updateOrder();
+        }
+
+        function zoomIn() {
+            zoomLevel += 0.1;
+            document.body.style.transform = `scale(${zoomLevel})`;
+        }
+
+        function zoomOut() {
+            zoomLevel -= 0.1;
+            document.body.style.transform = `scale(${zoomLevel})`;
         }
     </script>
 </body>
