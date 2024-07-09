@@ -217,6 +217,8 @@
             <div class="header">
                 <button class="reset-button" onclick="resetOrder()">Neu</button>
                 <div class="order-total" id="orderTotalTop">Gesamt: €0.00</div>
+                <input type="number" id="paid" step="0.01">
+                <div class="order-total" id="change">Zurück: €0.00</div>
             </div>
             <div id="orderList"></div>
         </div>
@@ -225,6 +227,7 @@
     <script>
         let order = [];
         let zoomLevel = 1;
+        let total = 0;
 
         function addItem(name, price, vis) {
             const existingItem = order.find(item => item.name === name);
@@ -253,7 +256,7 @@
             const orderList = document.getElementById('orderList');
             orderList.innerHTML = '';
 
-            let total = 0;
+            total = 0;
             order.forEach(item => {
                 total += item.price * item.quantity;
                 const orderItem = document.createElement('div');
@@ -284,6 +287,23 @@
             zoomLevel -= 0.1;
             document.body.style.transform = `scale(${zoomLevel})`;
         }
+
+        function calculateChange() {            
+            const paid = parseFloat(document.getElementById('paid').value);
+
+            if (isNaN(total) || isNaN(paid) || total < 0 || paid < 0) {
+                return;
+            }
+
+            if (paid < total) {
+                return;
+            }
+
+            const change = paid - total;
+            document.getElementById('change').innerText = `Zurück: ${change.toFixed(2)} €`;
+        }
+
+        document.getElementById('paid').addEventListener('input', calculateChange);
     </script>
     <script>
         if ('serviceWorker' in navigator) {
