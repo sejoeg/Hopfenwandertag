@@ -278,14 +278,12 @@
         }
     </script>
     <script>
-        // Registrieren des Service Workers
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/cache.js').then(function(registration) {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }, function(error) {
-                    console.log('ServiceWorker registration failed: ', error);
-                });
+            navigator.serviceWorker.register('/cache.js')
+            .then(function(registration) {
+                console.log('Service Worker registriert mit Scope:', registration.scope);
+            }).catch(function(error) {
+                console.log('Service Worker Registrierung fehlgeschlagen:', error);
             });
         }
     </script>
