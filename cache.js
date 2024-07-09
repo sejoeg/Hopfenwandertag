@@ -2,9 +2,6 @@ const CACHE_NAME = 'restaurant-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/styles.css',
-  '/script.js',
-  // Fügen Sie hier alle weiteren Ressourcen hinzu, die Sie cachen möchten
 ];
 
 // Installationsereignis
