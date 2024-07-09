@@ -1,6 +1,6 @@
 var GHPATH = '/Hopfenwandertag';
 var APP_PREFIX = 'hwt_';
-var VERSION = 'version_009';
+var VERSION = 'version_010';
 var URLS = [    
   `${GHPATH}/`,
   `${GHPATH}/index.html`,
