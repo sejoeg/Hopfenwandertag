@@ -279,7 +279,7 @@
     </script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/cache.js')
+            navigator.serviceWorker.register('/Hopfenwandertag/cache.js', {scope: '/Hopfenwandertag/'})
             .then(function(registration) {
                 console.log('Service Worker registriert mit Scope:', registration.scope);
             }).catch(function(error) {
