@@ -99,8 +99,15 @@
             font-size: 1.5em;
             text-align: left;
             font-weight: bold;
-            margin-left: auto;
-            margin-right: 10px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        .order-bar {
+            font-size: 1.5em;
+            text-align: right;
+            font-weight: bold;
+            margin-left: 20px;
+            margin-right: 5px;
         }
         .reset-button {
             background-color: #dc3545;
@@ -119,6 +126,15 @@
             justify-content: flex-start;
             align-items: center;
             margin-bottom: 10px;
+        }       
+        .input-paid{
+		    flex: 0 0 100px;
+		    min-width: 0;
+            border: 2px solid black;
+            border-radius: 4px;
+			font-size: 1.5em;
+            text-align: right;
+            font-weight: bold;
         }
         .zoom-buttons {
             display: flex;
@@ -149,12 +165,7 @@
         .order-currywurst-wecken { background-color: #00FF00; }
         .order-wurst-wecken { background-color: #FF0000; }
         .order-pommes { background-color: #FFFF00; }
-        .order-pfand { background-color: #FFBF00; }        
-        .input[type=number]{
-            width: 20px;
-            border: 2px solid black;
-            border-radius: 4px;
-        }
+        .order-pfand { background-color: #FFBF00; } 
     </style>
 </head>
 <body>
@@ -221,9 +232,10 @@
         <div class="order-list-container">
             <div class="header">
                 <button class="reset-button" onclick="resetOrder()">Neu</button>
-                <div class="order-total" id="orderTotalTop">Gesamt: €0.00</div>
-                <!--<input type="number" id="paid" step="0.01">
-                <div class="order-total" id="change">Zurück: €0.00</div>-->
+                <div class="order-total" id="orderTotalTop">Gesamt: €0.00</div>					
+                <div class="order-bar" id="label">Bar:</div>
+                <input class="input-paid" type="number" id="paid" step="0.01" min="0">
+                <div class="order-total" id="change">Zurück: ---</div>
             </div>
             <div id="orderList"></div>
         </div>
@@ -276,10 +288,14 @@
             });
 
             document.getElementById('orderTotalTop').innerText = `Gesamt: €${total.toFixed(2)}`;
+			
+			calculateChange();
         }
 
         function resetOrder() {
             order = [];
+			total = [];
+			document.getElementById('paid').value = "";
             updateOrder();
         }
 
@@ -296,16 +312,14 @@
         function calculateChange() {            
             const paid = parseFloat(document.getElementById('paid').value);
 
-            if (isNaN(total) || isNaN(paid) || total < 0 || paid < 0) {
-                return;
-            }
-
-            if (paid < total) {
+            if (isNaN(total) || isNaN(paid) || total < 0 || paid < 0 || paid < total)
+			{
+			    document.getElementById('change').innerText = `Zurück: ---`;
                 return;
             }
 
             const change = paid - total;
-            document.getElementById('change').innerText = `Zurück: ${change.toFixed(2)} €`;
+            document.getElementById('change').innerText = `Zurück: €${change.toFixed(2)}`;
         }
 
         document.getElementById('paid').addEventListener('input', calculateChange);
