@@ -286,7 +286,7 @@
                 orderItem.className = `order-item ${item.vis}`;
                 orderItem.innerHTML = `
                     <div class="order-item-name">${item.name}</div>
-                    <div class="order-item-quantity">${item.quantity}</div>
+                    <div class="order-item-quantity">${item.quantity}&nbsp;</div>
                     <div class="order-item-price">${(item.price * item.quantity).toFixed(2)}€&nbsp;</div>
                     <button onclick="removeItem('${item.name}')">-</button>
                 `;
