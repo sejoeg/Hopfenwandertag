@@ -33,19 +33,22 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .item-list-container {
+		    max-width: 40%;
             flex: 1;
             padding: 10px;
         }
         .order-list-container {
-		    max-width: 50%;
             flex: 1;
             padding: 10px;
         }
         .item-list {
             margin-bottom: 10px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
         }
         .item {
-            margin-bottom: 10px;
+            margin-bottom: 1px;
         }
         .item button {
             width: 100%;
@@ -115,6 +118,7 @@
             margin-right: 5px;
         }
         .reset-button {
+            font-size: 2em;
             background-color: #dc3545;
         }
         .reset-button:active {
@@ -288,7 +292,7 @@
                     <div class="order-item-name">${item.name}</div>
                     <div class="order-item-quantity">${item.quantity}&nbsp;</div>
                     <div class="order-item-price">${(item.price * item.quantity).toFixed(2)}€&nbsp;</div>
-                    <button onclick="removeItem('${item.name}')">-</button>
+                    <button onclick="removeItem('${item.name}')">&nbsp;-&nbsp;</button>
                 `;
                 orderList.appendChild(orderItem);
             });
