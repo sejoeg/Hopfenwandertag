@@ -102,10 +102,10 @@
             background-color: #0056b3;
         }
         .order-total {
-            font-size: 1.5em;
+            font-size: 2em;
             text-align: left;
             font-weight: bold;
-            margin-left: 15px;
+            margin-left: 5px;
             margin-right: 15px;
         }
         .order-bar {
@@ -115,8 +115,15 @@
             margin-left: 5px;
             margin-right: 5px;
         }
+        .order-return {
+            font-size: 1.5em;
+            text-align: left;
+            font-weight: bold;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
         .reset-button {
-            font-size: 2em;
+            font-size: 3em;
             background-color: #dc3545;
         }
         .reset-button:active {
@@ -130,11 +137,24 @@
         }
         .header {
             display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 5px;
+        }  
+        .header-left-container {
+            display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
             align-items: center;
-            margin-bottom: 10px;
-        }       
+        }    
+        .header-left {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 5px;
+        }     
         .input-paid{
             flex: 0 0 90px;
             min-width: 0;
@@ -185,7 +205,7 @@
             <div class="item-list" id="itemList">
                 <div class="item">
                     <button class="item-gyros-pommes" onclick="addItem('Gyros mit Pommes, Zaziki und Weißkrautsalat', 9.00, 'order-gyros-pommes');addItem('Speiseteller inkl. Besteck', 3.00, 'order-pfand')">
-                        Gyros Pommes<br>9.00€ + 3.00€
+                        Gyros Pommes<br>9.00€ + &#127869;
                     </button>
                 </div>
                 <div class="item">
@@ -195,7 +215,7 @@
                 </div>
                 <div class="item">
                     <button class="item-steak-pommes" onclick="addItem('Steak mit Pommes oder Kartoffelsalat', 8.00, 'order-steak-pommes');addItem('Speiseteller inkl. Besteck', 3.00, 'order-pfand')">
-                        Steak Pommes / Kartoffelsalat<br>8.00€ + 3.00€
+                        Steak Pommes / Kartoffelsalat<br>8.00€ + &#127869;
                     </button>
                 </div>
                 <div class="item">
@@ -215,7 +235,7 @@
                 </div>
                 <div class="item">
                     <button class="item-maultaschen" onclick="addItem('Vegetarische Maultaschen mit Kartoffelsalat', 8.00, 'order-maultaschen');addItem('Speiseteller inkl. Besteck', 3.00, 'order-pfand')">
-                        Maultaschen Kartoffelsalat<br>8.00€ + 3.00€
+                        Maultaschen Kartoffelsalat<br>8.00€ + &#127869;
                     </button>
                 </div>
                 <div class="item">
@@ -230,26 +250,30 @@
                 </div>
                 <div class="item">
                     <button class="item-pfand" onclick="addItem('Speiseteller inkl. Besteck', 3.00, 'order-pfand')">
-                        Teller Besteck<br>3.00€
+                        Teller Besteck &#127869;<br>3.00€
                     </button>
                 </div>
             </div>
             <div class="zoom-buttons">
                 <button onclick="zoomIn()">+</button>
                 <button onclick="zoomOut()">-</button>
-                <div class="version">V31</div>
+                <div class="version">V32</div>
             </div>
         </div>
 
         <div class="order-list-container">
             <div class="header">
+                <div class="header-left-container">
+                    <div class="header-left">
+                        <div class="order-total" id="orderTotalTop">Gesamt: 0.00€</div> 
+                    </div>
+                    <div class="header-left">                   
+                        <div class="order-bar" id="label">Bar:</div>
+                        <input class="input-paid" type="number" id="paid" step="0.01" min="0" inputmode="decimal">
+                        <div class="order-return" id="change">Zurück: ---</div>
+                    </div>
+                </div>
                 <button class="reset-button" onclick="resetOrder()">Neu</button>
-                <div class="order-total" id="orderTotalTop">Gesamt: 0.00€</div> 
-            </div>
-            <div class="header">                   
-                <div class="order-bar" id="label">Bar:</div>
-                <input class="input-paid" type="number" id="paid" step="0.01" min="0" inputmode="decimal">
-                <div class="order-total" id="change">Zurück: ---</div>
             </div>
             <div id="orderList"></div>
         </div>
