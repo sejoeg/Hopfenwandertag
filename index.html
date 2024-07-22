@@ -83,12 +83,7 @@
             font-size: 1.2em;
             text-align: left;
         }
-        .order-item-quantity {
-            width: 50px;
-            text-align: center;
-            font-size: 1.2em;
-        }
-        .order-item-price {
+        .order-item-sum {
             width: 100px;
             text-align: right;
             font-size: 1.2em;
@@ -242,7 +237,7 @@
             <div class="zoom-buttons">
                 <button onclick="zoomIn()">+</button>
                 <button onclick="zoomOut()">-</button>
-                <div class="version">V30</div>
+                <div class="version">V31</div>
             </div>
         </div>
 
@@ -301,11 +296,16 @@
             order.forEach(item => {
                 total += item.price * item.quantity;
                 const orderItem = document.createElement('div');
+                let sum = item.price * item.quantity;
+                let sumQuant = item.quantity+'x&nbsp;';
+                if( sum < 10.0 ) {
+                    sumQuant += '&nbsp;&nbsp;';
+                }
+                sumQuant += sum.toFixed(2)+'€&nbsp;';
                 orderItem.innerHTML = `
                     <button class="order-item ${item.vis}" onclick="removeItem('${item.name}')">
                         <div class="order-item-name">${item.name}</div>
-                        <div class="order-item-quantity">${item.quantity}x&nbsp;</div>
-                        <div class="order-item-price">${(item.price * item.quantity).toFixed(2)}€&nbsp;</div>
+                        <div class="order-item-sum">${sumQuant}</div>
                     </button>
                 `;
                 orderList.appendChild(orderItem);
