@@ -33,7 +33,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .item-list-container {
-            max-width: 70%;
+		    max-width: 70%;
             flex: 1;
             padding: 10px;
         }
@@ -70,27 +70,24 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
-            padding: 10px;
+            padding: 3px;
             border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 5px;
+            border-radius: 3px;
+            margin-bottom: 2px;
             background-color: #fff;
-            color: black;
         }
         .order-item-name {
             flex-grow: 1;
             font-size: 1.2em;
-            text-align: left;
-        }
-        .order-item-quantity {
-            width: 50px;
-            text-align: center;
-            font-size: 1.2em;
         }
         .order-item-price {
-            width: 100px;
+            width: 110px;
             text-align: right;
+            font-size: 1.2em;
+        }
+        .order-item-quantity {
+            width: 40px;
+            text-align: center;
             font-size: 1.2em;
         }
         button {
@@ -135,17 +132,17 @@
         }
         .header {
             display: flex;
-            flex-wrap: wrap;
+			flex-wrap: wrap;
             justify-content: flex-start;
             align-items: center;
             margin-bottom: 10px;
         }       
         .input-paid{
-            flex: 0 0 90px;
-            min-width: 0;
+		    flex: 0 0 90px;
+		    min-width: 0;
             border: 2px solid black;
             border-radius: 4px;
-            font-size: 1.5em;
+			font-size: 1.5em;
             text-align: right;
             font-weight: bold;
         }
@@ -156,7 +153,7 @@
         }
         .zoom-buttons button {
             margin: 0 10px;
-        }
+        }		
         /* Hintergrundfarben für Artikel */
         .item-gyros-pommes { background-color: #FFFFFF; }
         .item-gyros-wecken { background-color: #DF7401; }
@@ -178,7 +175,7 @@
         .order-currywurst-wecken { background-color: #00FF00; }
         .order-wurst-wecken { background-color: #FF0000; }
         .order-pommes { background-color: #FFFF00; }
-        .order-pfand { background-color: #FFBF00; }
+        .order-pfand { background-color: #FFBF00; } 
     </style>
 </head>
 <body>
@@ -245,7 +242,7 @@
         <div class="order-list-container">
             <div class="header">
                 <button class="reset-button" onclick="resetOrder()">Neu</button>
-                <div class="order-total" id="orderTotalTop">Gesamt: 0.00€</div>                    
+                <div class="order-total" id="orderTotalTop">Gesamt: 0.00€</div>					
                 <div class="order-bar" id="label">Bar:</div>
                 <input class="input-paid" type="number" id="paid" step="0.01" min="0">
                 <div class="order-total" id="change">Zurück: ---</div>
@@ -290,25 +287,25 @@
             order.forEach(item => {
                 total += item.price * item.quantity;
                 const orderItem = document.createElement('div');
+                orderItem.className = `order-item ${item.vis}`;
                 orderItem.innerHTML = `
-                    <button class="order-item ${item.vis}" onclick="removeItem('${item.name}')">
-                        <div class="order-item-name">${item.name}</div>
-                        <div class="order-item-quantity">${item.quantity}x&nbsp;</div>
-                        <div class="order-item-price">${(item.price * item.quantity).toFixed(2)}€&nbsp;</div>
-                    </button>
+                    <div class="order-item-name">${item.name}</div>
+                    <div class="order-item-quantity">${item.quantity}x&nbsp;</div>
+                    <div class="order-item-price">${(item.price * item.quantity).toFixed(2)}€&nbsp;</div>
+                    <button onclick="removeItem('${item.name}')">&nbsp;-&nbsp;</button>
                 `;
                 orderList.appendChild(orderItem);
             });
 
             document.getElementById('orderTotalTop').innerText = `Gesamt: ${total.toFixed(2)}€`;
-            
-            calculateChange();
+			
+			calculateChange();
         }
 
         function resetOrder() {
             order = [];
-            total = [];
-            document.getElementById('paid').value = "";
+			total = [];
+			document.getElementById('paid').value = "";
             updateOrder();
         }
 
@@ -325,8 +322,9 @@
         function calculateChange() {            
             const paid = parseFloat(document.getElementById('paid').value);
 
-            if (isNaN(total) || isNaN(paid) || total < 0 || paid < 0 || paid < total) {
-                document.getElementById('change').innerText = `Zurück: ---`;
+            if (isNaN(total) || isNaN(paid) || total < 0 || paid < 0 || paid < total)
+			{
+			    document.getElementById('change').innerText = `Zurück: ---`;
                 return;
             }
 
