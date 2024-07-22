@@ -285,6 +285,11 @@
         function updateOrder() {
             const orderList = document.getElementById('orderList');
             orderList.innerHTML = '';
+			
+			const itemIndex = order.findIndex(item => item.name === 'Speiseteller inkl. Besteck');
+            if (itemIndex > -1) {
+				order.push(order.splice(itemIndex, 1)[0]);
+			}
 
             total = 0;
             order.forEach(item => {
