@@ -1,7 +1,7 @@
 {
-  "name": "Hopfenwandertag 2024 - Essen",
+  "name": "Hopfenwandertag 2026 - Essen",
   "short_name": "HWT MVL",
-  "description": "Kassenoberfläche für den Hopfenwandertag 2024",
+  "description": "Kassenoberfläche für den Hopfenwandertag 2026",
   "scope": "/Hopfenwandertag/",
   "start_url": "/Hopfenwandertag/",
   "background_color": "#ffffff",
