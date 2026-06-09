@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Hopfenwandertag 2024 - Essen</title>
+    <title>Hopfenwandertag 2026 - Essen</title>
     <link rel="canonical" href="https://sejoeg.github.io/Hopfenwandertag/">
     <link rel="manifest" href="./manifest.webmanifest">
     <link rel="apple-touch-icon" href="./img/logo.png">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-status-bar-style" content="black">
-    <meta name="mobile-web-app-title" content="HWT 2024">
+    <meta name="mobile-web-app-title" content="HWT 2026">
     <meta name="theme-color" content="#ffffff">
     <style>
         :root {
@@ -262,7 +262,7 @@
         <section aria-label="Artikel">
             <div class="items" id="itemList"></div>
             <div class="toolbar" aria-label="Anzeige">
-                <button type="button" id="zoomIn" aria-label="Ansicht vergroessern">+</button>
+                <button type="button" id="zoomIn" aria-label="Ansicht vergrößern">+</button>
                 <button type="button" id="zoomOut" aria-label="Ansicht verkleinern">-</button>
                 <span class="version">V34</span>
             </div>
@@ -271,12 +271,12 @@
         <section class="order-panel" aria-label="Bestellung">
             <div class="header">
                 <div class="totals">
-                    <div class="total" id="orderTotalTop" aria-live="polite">Gesamt: 0.00 Euro</div>
+                    <div class="total" id="orderTotalTop" aria-live="polite">Gesamt: 0.00€</div>
                     <div class="payment-row">
                         <label for="paid">Bar:</label>
                         <input class="input-paid" type="number" id="paid" step="0.01" min="0" inputmode="decimal" autocomplete="off">
                     </div>
-                    <div class="change" id="change" aria-live="polite">Zurueck: ---</div>
+                    <div class="change" id="change" aria-live="polite">Zurück: ---</div>
                 </div>
                 <button class="reset-button" type="button" id="resetOrder">Neu</button>
             </div>
@@ -287,14 +287,14 @@
     <script>
         const DEPOSIT_ID = "pfand";
         const items = [
-            { id: "gyros-pommes", name: "Gyros mit Pommes, Zaziki und Weisskrautsalat", label: "Gyros Pommes", priceCents: 900, color: "color-gyros-pommes", includesDeposit: true },
-            { id: "gyros-wecken", name: "Gyros mit Wecken, Zaziki und Weisskrautsalat", label: "Gyros Wecken", priceCents: 700, color: "color-gyros-wecken" },
+            { id: "gyros-pommes", name: "Gyros mit Pommes, Zaziki und Weißkrautsalat", label: "Gyros Pommes", priceCents: 900, color: "color-gyros-pommes", includesDeposit: true },
+            { id: "gyros-wecken", name: "Gyros mit Wecken, Zaziki und Weißkrautsalat", label: "Gyros Wecken", priceCents: 700, color: "color-gyros-wecken" },
             { id: "steak-pommes", name: "Steak mit Pommes oder Kartoffelsalat", label: "Steak Pommes / Kartoffelsalat", priceCents: 800, color: "color-steak-pommes", includesDeposit: true },
             { id: "steak-wecken", name: "Steak im Wecken", label: "Steak Wecken", priceCents: 500, color: "color-steak-wecken" },
             { id: "currywurst-pommes", name: "Currywurst mit Pommes", label: "Currywurst Pommes", priceCents: 700, color: "color-currywurst-pommes" },
             { id: "currywurst-wecken", name: "Currywurst mit Wecken", label: "Currywurst Wecken", priceCents: 450, color: "color-currywurst-wecken" },
             { id: "maultaschen", name: "Vegetarische Maultaschen mit Kartoffelsalat", label: "Maultaschen Kartoffelsalat", priceCents: 800, color: "color-maultaschen", includesDeposit: true },
-            { id: "wurst-wecken", name: "Rote/Weisse Wurst im Wecken", label: "Wurst Wecken", priceCents: 400, color: "color-wurst-wecken" },
+            { id: "wurst-wecken", name: "Rote/Weiße Wurst im Wecken", label: "Wurst Wecken", priceCents: 400, color: "color-wurst-wecken" },
             { id: "pommes", name: "Portion Pommes oder Kartoffelsalat", label: "Pommes / Kartoffelsalat", priceCents: 300, color: "color-pommes" },
             { id: DEPOSIT_ID, name: "Speiseteller inkl. Besteck", label: "Teller Besteck", priceCents: 300, color: "color-pfand" }
         ];
@@ -310,7 +310,7 @@
         const changeOutput = document.getElementById("change");
 
         function formatEuro(cents) {
-            return `${(cents / 100).toFixed(2)} Euro`;
+            return `${(cents / 100).toFixed(2)}€`;
         }
 
         function addItem(id) {
@@ -408,11 +408,11 @@
             const paidCents = Math.round(paid * 100);
 
             if (!Number.isFinite(paidCents) || paidCents < totalCents) {
-                changeOutput.textContent = "Zurueck: ---";
+                changeOutput.textContent = "Zurück: ---";
                 return;
             }
 
-            changeOutput.textContent = `Zurueck: ${formatEuro(paidCents - totalCents)}`;
+            changeOutput.textContent = `Zurück: ${formatEuro(paidCents - totalCents)}`;
         }
 
         function renderItems() {
@@ -432,7 +432,7 @@
 
                 label.textContent = item.label;
                 price.textContent = formatEuro(item.priceCents);
-                deposit.textContent = item.includesDeposit ? "+ Teller" : "";
+                deposit.textContent = item.includesDeposit ? "🍽" : "";
                 meta.className = "item-meta";
                 meta.append(price, deposit);
 
