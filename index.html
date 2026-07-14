@@ -40,7 +40,8 @@
         }
 
         button,
-        input {
+        input,
+        select {
             font: inherit;
         }
 
@@ -54,9 +55,22 @@
         }
 
         button:focus-visible,
-        input:focus-visible {
+        input:focus-visible,
+        select:focus-visible {
             outline: 4px solid var(--focus);
             outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         .app {
@@ -220,6 +234,18 @@
             padding: 0;
         }
 
+        .app-select {
+            min-height: 2.1rem;
+            max-width: 11rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--surface);
+            color: var(--muted);
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 0 0.45rem;
+        }
+
         .version {
             color: var(--muted);
             font-size: 0.85rem;
@@ -235,6 +261,13 @@
         .color-wurst-wecken { background-color: #e00000; color: #ffffff; }
         .color-pommes { background-color: #ffff00; }
         .color-pfand { background-color: #ffbf00; }
+        .color-bier { background-color: #f6d365; }
+        .color-radler { background-color: #b7e36d; }
+        .color-alkoholfrei { background-color: #80cbc4; }
+        .color-schorle { background-color: #ffcc80; }
+        .color-softdrink { background-color: #90caf9; }
+        .color-becherpfand { background-color: #d7ccc8; }
+        .color-flaschenpfand { background-color: #c5e1a5; }
 
         .color-steak-wecken .item-meta,
         .color-wurst-wecken .item-meta {
@@ -286,9 +319,11 @@
         <section aria-label="Artikel">
             <div class="items" id="itemList"></div>
             <div class="toolbar" aria-label="Anzeige">
+                <label class="sr-only" for="appSelector">App-Version</label>
+                <select class="app-select" id="appSelector" aria-label="App-Version"></select>
                 <button type="button" id="zoomIn" aria-label="Ansicht vergrößern">+</button>
                 <button type="button" id="zoomOut" aria-label="Ansicht verkleinern">-</button>
-                <span class="version">V47</span>
+                <span class="version">V48</span>
             </div>
         </section>
 
@@ -311,24 +346,61 @@
     </main>
 
     <script>
-        const DEPOSIT_ID = "pfand";
-        const items = [
-            { id: "gyros-pommes", name: "Gyros mit Pommes, Zaziki und Weißkrautsalat", label: "Gyros Pommes", priceCents: 900, color: "color-gyros-pommes", includesDeposit: true },
-            { id: "gyros-wecken", name: "Gyros mit Wecken, Zaziki und Weißkrautsalat", label: "Gyros Wecken", priceCents: 700, color: "color-gyros-wecken" },
-            { id: "steak-pommes", name: "Steak mit Pommes oder Kartoffelsalat", label: "Steak Pommes / Kartoffelsalat", priceCents: 800, color: "color-steak-pommes", includesDeposit: true },
-            { id: "steak-wecken", name: "Steak im Wecken", label: "Steak Wecken", priceCents: 500, color: "color-steak-wecken" },
-            { id: "currywurst-pommes", name: "Currywurst mit Pommes", label: "Currywurst Pommes", priceCents: 700, color: "color-currywurst-pommes" },
-            { id: "currywurst-wecken", name: "Currywurst mit Wecken", label: "Currywurst Wecken", priceCents: 450, color: "color-currywurst-wecken" },
-            { id: "maultaschen", name: "Vegetarische Maultaschen mit Kartoffelsalat", label: "Maultaschen Kartoffelsalat", priceCents: 800, color: "color-maultaschen", includesDeposit: true },
-            { id: "wurst-wecken", name: "Rote/Weiße Wurst im Wecken", label: "Wurst Wecken", priceCents: 400, color: "color-wurst-wecken" },
-            { id: "pommes", name: "Portion Pommes oder Kartoffelsalat", label: "Pommes / Kartoffelsalat", priceCents: 300, color: "color-pommes" },
-            { id: DEPOSIT_ID, name: "Speiseteller inkl. Besteck", label: "Teller Besteck 🍽", priceCents: 300, color: "color-pfand" }
-        ];
+        const DEFAULT_APP_ID = "essen";
+        const appConfigs = {
+            essen: {
+                title: "Hopfenwandertag 2026 - Essen",
+                shortTitle: "HWT Essen",
+                orderLabel: "Bestellung Essen",
+                itemLabel: "Speisen",
+                items: [
+                    { id: "gyros-pommes", name: "Gyros mit Pommes, Zaziki und Weißkrautsalat", label: "Gyros Pommes", priceCents: 900, color: "color-gyros-pommes", depositItemId: "speiseteller" },
+                    { id: "gyros-wecken", name: "Gyros mit Wecken, Zaziki und Weißkrautsalat", label: "Gyros Wecken", priceCents: 700, color: "color-gyros-wecken" },
+                    { id: "steak-pommes", name: "Steak mit Pommes oder Kartoffelsalat", label: "Steak Pommes / Kartoffelsalat", priceCents: 800, color: "color-steak-pommes", depositItemId: "speiseteller" },
+                    { id: "steak-wecken", name: "Steak im Wecken", label: "Steak Wecken", priceCents: 500, color: "color-steak-wecken" },
+                    { id: "currywurst-pommes", name: "Currywurst mit Pommes", label: "Currywurst Pommes", priceCents: 700, color: "color-currywurst-pommes" },
+                    { id: "currywurst-wecken", name: "Currywurst mit Wecken", label: "Currywurst Wecken", priceCents: 450, color: "color-currywurst-wecken" },
+                    { id: "maultaschen", name: "Vegetarische Maultaschen mit Kartoffelsalat", label: "Maultaschen Kartoffelsalat", priceCents: 800, color: "color-maultaschen", depositItemId: "speiseteller" },
+                    { id: "wurst-wecken", name: "Rote/Weiße Wurst im Wecken", label: "Wurst Wecken", priceCents: 400, color: "color-wurst-wecken" },
+                    { id: "pommes", name: "Portion Pommes oder Kartoffelsalat", label: "Pommes / Kartoffelsalat", priceCents: 300, color: "color-pommes" }
+                ],
+                depositItems: [
+                    { id: "speiseteller", name: "Speiseteller inkl. Besteck", label: "Teller Besteck 🍽", priceCents: 300, color: "color-pfand", icon: "🍽" }
+                ]
+            },
+            getraenke: {
+                title: "Hopfenwandertag 2026 - Getränke",
+                shortTitle: "HWT Getränke",
+                orderLabel: "Bestellung Getränke",
+                itemLabel: "Getränke",
+                items: [
+                    { id: "bier", name: "Bier 0,5 l", label: "Bier 0,5 l", priceCents: 400, color: "color-bier", depositItemId: "becherpfand" },
+                    { id: "radler", name: "Radler 0,5 l", label: "Radler 0,5 l", priceCents: 400, color: "color-radler", depositItemId: "becherpfand" },
+                    { id: "alkoholfrei", name: "Alkoholfreies Bier 0,5 l", label: "Alkoholfrei 0,5 l", priceCents: 400, color: "color-alkoholfrei", depositItemId: "becherpfand" },
+                    { id: "apfelschorle", name: "Apfelschorle 0,5 l", label: "Apfelschorle 0,5 l", priceCents: 300, color: "color-schorle", depositItemId: "flaschenpfand" },
+                    { id: "wasser", name: "Mineralwasser 0,5 l", label: "Wasser 0,5 l", priceCents: 250, color: "color-alkoholfrei", depositItemId: "flaschenpfand" },
+                    { id: "spezi", name: "Spezi 0,5 l", label: "Spezi 0,5 l", priceCents: 300, color: "color-softdrink", depositItemId: "flaschenpfand" }
+                ],
+                depositItems: [
+                    { id: "becherpfand", name: "Becherpfand", label: "Becherpfand", priceCents: 200, color: "color-becherpfand", icon: "🥤" },
+                    { id: "flaschenpfand", name: "Flaschenpfand", label: "Flaschenpfand", priceCents: 100, color: "color-flaschenpfand", icon: "↺" }
+                ]
+            }
+        };
 
         const order = new Map();
+        let activeConfig = appConfigs[DEFAULT_APP_ID];
+        let items = [];
+        let itemById = new Map();
+        let depositItemById = new Map();
+        let itemOrder = new Map();
         let zoomLevel = 1;
         let totalCents = 0;
 
+        const appRoot = document.querySelector(".app");
+        const articleSection = document.querySelector("[aria-label='Artikel']");
+        const orderPanel = document.querySelector(".order-panel");
+        const appSelector = document.getElementById("appSelector");
         const itemList = document.getElementById("itemList");
         const orderList = document.getElementById("orderList");
         const orderTotalTop = document.getElementById("orderTotalTop");
@@ -339,15 +411,73 @@
             return `${(cents / 100).toFixed(2)}€`;
         }
 
+        function getInitialAppId() {
+            const params = new URLSearchParams(window.location.search);
+            const requestedApp = params.get("app");
+            return appConfigs[requestedApp] ? requestedApp : DEFAULT_APP_ID;
+        }
+
+        function configureApp(appId) {
+            activeConfig = appConfigs[appId] || appConfigs[DEFAULT_APP_ID];
+            items = [...activeConfig.items, ...activeConfig.depositItems];
+            itemById = new Map(items.map(item => [item.id, item]));
+            depositItemById = new Map(activeConfig.depositItems.map(item => [item.id, item]));
+            itemOrder = new Map(items.map((item, index) => [item.id, index]));
+        }
+
+        function updateAppMetadata() {
+            document.title = activeConfig.title;
+            appRoot.setAttribute("aria-label", `${activeConfig.title} Kasse`);
+            articleSection.setAttribute("aria-label", activeConfig.itemLabel);
+            orderPanel.setAttribute("aria-label", activeConfig.orderLabel);
+
+            const mobileTitle = document.querySelector("meta[name='mobile-web-app-title']");
+            if (mobileTitle) {
+                mobileTitle.setAttribute("content", activeConfig.shortTitle);
+            }
+        }
+
+        function renderAppSelector(activeAppId) {
+            const fragment = document.createDocumentFragment();
+
+            Object.entries(appConfigs).forEach(([appId, config]) => {
+                const option = document.createElement("option");
+                option.value = appId;
+                option.textContent = config.shortTitle;
+                fragment.appendChild(option);
+            });
+
+            appSelector.replaceChildren(fragment);
+            appSelector.value = activeAppId;
+        }
+
+        function setActiveApp(appId, updateUrl = true) {
+            const nextAppId = appConfigs[appId] ? appId : DEFAULT_APP_ID;
+            configureApp(nextAppId);
+            updateAppMetadata();
+            renderAppSelector(nextAppId);
+            order.clear();
+            totalCents = 0;
+            paidInput.value = "";
+            renderItems();
+            updateOrder();
+
+            if (updateUrl) {
+                const url = new URL(window.location.href);
+                url.searchParams.set("app", nextAppId);
+                window.history.replaceState({}, "", url);
+            }
+        }
+
         function addItem(id) {
-            const item = items.find(entry => entry.id === id);
+            const item = itemById.get(id);
             if (!item) {
                 return;
             }
 
             increaseQuantity(item.id);
-            if (item.includesDeposit) {
-                increaseQuantity(DEPOSIT_ID);
+            if (item.depositItemId && depositItemById.has(item.depositItemId)) {
+                increaseQuantity(item.depositItemId);
             }
             updateOrder();
         }
@@ -369,9 +499,11 @@
 
         function orderedItems() {
             return items.filter(item => order.has(item.id)).sort((a, b) => {
-                if (a.id === DEPOSIT_ID) return 1;
-                if (b.id === DEPOSIT_ID) return -1;
-                return items.indexOf(a) - items.indexOf(b);
+                const aIsDeposit = depositItemById.has(a.id);
+                const bIsDeposit = depositItemById.has(b.id);
+                if (aIsDeposit && !bIsDeposit) return 1;
+                if (!aIsDeposit && bIsDeposit) return -1;
+                return itemOrder.get(a.id) - itemOrder.get(b.id);
             });
         }
 
@@ -443,6 +575,7 @@
 
         function renderItems() {
             const fragment = document.createDocumentFragment();
+            itemList.replaceChildren();
 
             items.forEach(item => {
                 const wrapper = document.createElement("div");
@@ -450,13 +583,15 @@
                 const label = document.createElement("span");
                 const meta = document.createElement("span");
                 const price = document.createElement("span");
+                const depositItem = depositItemById.get(item.depositItemId);
 
                 button.type = "button";
                 button.className = `item-button ${item.color}`;
-                button.addEventListener("click", () => addItem(item.id));
+                button.dataset.itemId = item.id;
+                button.setAttribute("aria-label", `${item.name} hinzufügen`);
 
                 label.textContent = item.label;
-                price.textContent = `${formatEuro(item.priceCents)}${item.includesDeposit ? " + 🍽" : ""}`;
+                price.textContent = `${formatEuro(item.priceCents)}${depositItem ? ` + ${depositItem.icon}` : ""}`;
                 meta.className = "item-meta";
                 meta.appendChild(price);
 
@@ -471,10 +606,20 @@
         document.getElementById("resetOrder").addEventListener("click", resetOrder);
         document.getElementById("zoomIn").addEventListener("click", () => setZoom(0.1));
         document.getElementById("zoomOut").addEventListener("click", () => setZoom(-0.1));
+        appSelector.addEventListener("change", event => setActiveApp(event.target.value));
+        itemList.addEventListener("click", event => {
+            if (!(event.target instanceof Element)) {
+                return;
+            }
+
+            const button = event.target.closest("[data-item-id]");
+            if (button) {
+                addItem(button.dataset.itemId);
+            }
+        });
         paidInput.addEventListener("input", calculateChange);
 
-        renderItems();
-        updateOrder();
+        setActiveApp(getInitialAppId(), false);
 
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("/Hopfenwandertag/cache.js", { scope: "/Hopfenwandertag/" })
