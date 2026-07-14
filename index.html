@@ -388,6 +388,26 @@
                     { id: "becherpfand", name: "Becherpfand", label: "Becherpfand", priceCents: 200, color: "color-becherpfand", icon: "🥤" },
                     { id: "flaschenpfand", name: "Flaschenpfand", label: "Flaschenpfand", priceCents: 100, color: "color-flaschenpfand", icon: "↺" }
                 ]
+            },
+            feierabendhock: {
+                title: "Feierabendhock 2026",
+                shortTitle: "Feierabendhock",
+                orderLabel: "Bestellung",
+                itemLabel: "Getränke / Essen",
+                items: [
+                    { id: "bier", name: "Bier 0,5 l", label: "Bier 0,5 l", priceCents: 400, color: "color-bier", depositItemId: "becherpfand" },
+                    { id: "radler", name: "Radler 0,5 l", label: "Radler 0,5 l", priceCents: 400, color: "color-radler", depositItemId: "becherpfand" },
+                    { id: "alkoholfrei", name: "Alkoholfreies Bier 0,5 l", label: "Alkoholfrei 0,5 l", priceCents: 400, color: "color-alkoholfrei", depositItemId: "becherpfand" },
+                    { id: "apfelschorle", name: "Apfelschorle 0,5 l", label: "Apfelschorle 0,5 l", priceCents: 300, color: "color-schorle", depositItemId: "flaschenpfand" },
+                    { id: "wasser", name: "Mineralwasser 0,5 l", label: "Wasser 0,5 l", priceCents: 250, color: "color-alkoholfrei", depositItemId: "flaschenpfand" },
+                    { id: "spezi", name: "Spezi 0,5 l", label: "Spezi 0,5 l", priceCents: 300, color: "color-softdrink", depositItemId: "flaschenpfand" },
+                    { id: "becher-zurueck", name: "Becher zurück", label: "Becher zurück", priceCents: -200, color: "color-pfand-zurueck" },
+                    { id: "flasche-zurueck", name: "Flasche zurück", label: "Flasche zurück", priceCents: -100, color: "color-pfand-zurueck" }
+                ],
+                depositItems: [
+                    { id: "becherpfand", name: "Becherpfand", label: "Becherpfand", priceCents: 200, color: "color-becherpfand", icon: "🥤" },
+                    { id: "flaschenpfand", name: "Flaschenpfand", label: "Flaschenpfand", priceCents: 100, color: "color-flaschenpfand", icon: "↺" }
+                ]
             }
         };
 
