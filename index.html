@@ -325,7 +325,7 @@
                 <select class="app-select" id="appSelector" aria-label="App-Version"></select>
                 <button type="button" id="zoomIn" aria-label="Ansicht vergrößern">+</button>
                 <button type="button" id="zoomOut" aria-label="Ansicht verkleinern">-</button>
-                <span class="version">V55</span>
+                <span class="version">V56</span>
             </div>
         </section>
 
@@ -378,10 +378,10 @@
                 items: [
                     { id: "bier-gross", name: "Bier / Radler / Weizen / Alkoholfrei 0,5 l", label: "Bier 0,5 l", priceCents: 400, color: "color-bier-gross", depositItemId: "glaspfand" },
                     { id: "bier-klein", name: "Bier / Radler / Weizen / Alkoholfrei 0,2 l", label: "Bier 0,2 l", priceCents: 250, color: "color-bier-klein" },
-                    { id: "glas-zurueck", name: "Glas zurück", label: "Glas zurück", priceCents: -300, color: "color-pfand-zurueck" }
+                    { id: "glas-zurueck", name: "Glas zurück", label: "Glas zurück", priceCents: -300, color: "color-bier-gross" }
                 ],
                 depositItems: [
-                    { id: "glaspfand", name: "Glaspfand", label: "Glaspfand", priceCents: 200, color: "color-glaspfand", icon: "🥤" }
+                    { id: "glaspfand", name: "Glaspfand", label: "Glaspfand 🥛", priceCents: 300, color: "color-bier-gross", icon: "🥛" }
                 ]
             },
             feierabendhock: {
@@ -400,7 +400,7 @@
                     { id: "flasche-zurueck", name: "Flasche zurück", label: "Flasche zurück", priceCents: -100, color: "color-pfand-zurueck" }
                 ],
                 depositItems: [
-                    { id: "glaspfand", name: "Glaspfand", label: "Glaspfand", priceCents: 200, color: "color-glaspfand", icon: "🥤" },
+                    { id: "glaspfand", name: "Glaspfand", label: "Glaspfand", priceCents: 200, color: "color-glaspfand", icon: "🥛" },
                     { id: "flaschenpfand", name: "Flaschenpfand", label: "Flaschenpfand", priceCents: 100, color: "color-flaschenpfand", icon: "↺" }
                 ]
             }
