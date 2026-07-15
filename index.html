@@ -266,10 +266,12 @@
         .color-schorle { background-color: #ffcc80; }
         .color-softdrink { background-color: #90caf9; }
 
-        .color-pfand { background-color: #ffbf00; }
+        .color-geschirrpfand { background-color: #ffbf00; }
+        .color-geschirrpfand-zurueck { background-color: #ffbf00; }
         .color-glaspfand { background-color: #d7ccc8; }
-        .color-flaschenpfand { background-color: #c5e1a5; }
-        .color-pfand-zurueck { background-color: #eceff1; }
+        .color-flaschenpfand { background-color: #ffcc80; }
+        .color-glaspfand-zurueck { background-color: #d7ccc8; }
+        .color-flaschenpfand-zurueck { background-color: #ffcc80; }
 
         .color-dark-brown .item-meta,
         .color-red .item-meta {
@@ -325,7 +327,7 @@
                 <select class="app-select" id="appSelector" aria-label="App-Version"></select>
                 <button type="button" id="zoomIn" aria-label="Ansicht vergrößern">+</button>
                 <button type="button" id="zoomOut" aria-label="Ansicht verkleinern">-</button>
-                <span class="version">V56</span>
+                <span class="version">V57</span>
             </div>
         </section>
 
@@ -367,7 +369,7 @@
                     { id: "pommes", name: "Portion Pommes oder Kartoffelsalat", label: "Pommes / Kartoffelsalat", priceCents: 300, color: "color-yellow" }
                 ],
                 depositItems: [
-                    { id: "speiseteller", name: "Speiseteller inkl. Besteck", label: "Teller Besteck 🍽️", priceCents: 300, color: "color-pfand", icon: "🍽️️" }
+                    { id: "speiseteller", name: "Speiseteller inkl. Besteck", label: "Teller Besteck 🍽️", priceCents: 300, color: "color-geschirrpfand", icon: "🍽️️" }
                 ]
             },
             bierstand: {
@@ -378,7 +380,7 @@
                 items: [
                     { id: "bier-gross", name: "Bier / Radler / Weizen / Alkoholfrei 0,5 l", label: "Bier 0,5 l", priceCents: 400, color: "color-bier-gross", depositItemId: "glaspfand" },
                     { id: "bier-klein", name: "Bier / Radler / Weizen / Alkoholfrei 0,2 l", label: "Bier 0,2 l", priceCents: 250, color: "color-bier-klein" },
-                    { id: "glas-zurueck", name: "Glas zurück", label: "Glas zurück", priceCents: -300, color: "color-bier-gross" }
+                    { id: "glas-zurueck", name: "Glas zurück", label: "Glas zurück 🥛", priceCents: -300, color: "color-bier-gross" }
                 ],
                 depositItems: [
                     { id: "glaspfand", name: "Glaspfand", label: "Glaspfand 🥛", priceCents: 300, color: "color-bier-gross", icon: "🥛" }
@@ -396,8 +398,8 @@
                     { id: "apfelschorle", name: "Apfelschorle 0,5 l", label: "Apfelschorle 0,5 l", priceCents: 300, color: "color-schorle", depositItemId: "flaschenpfand" },
                     { id: "wasser", name: "Mineralwasser 0,5 l", label: "Wasser 0,5 l", priceCents: 250, color: "color-alkoholfrei", depositItemId: "flaschenpfand" },
                     { id: "spezi", name: "Spezi 0,5 l", label: "Spezi 0,5 l", priceCents: 300, color: "color-softdrink", depositItemId: "flaschenpfand" },
-                    { id: "glas-zurueck", name: "Glas zurück", label: "Glas zurück", priceCents: -200, color: "color-pfand-zurueck" },
-                    { id: "flasche-zurueck", name: "Flasche zurück", label: "Flasche zurück", priceCents: -100, color: "color-pfand-zurueck" }
+                    { id: "glas-zurueck", name: "Glas zurück", label: "Glas zurück", priceCents: -200, color: "color-glaspfand-zurueck" },
+                    { id: "flasche-zurueck", name: "Flasche zurück", label: "Flasche zurück", priceCents: -100, color: "color-flaschenpfand-zurueck" }
                 ],
                 depositItems: [
                     { id: "glaspfand", name: "Glaspfand", label: "Glaspfand", priceCents: 200, color: "color-glaspfand", icon: "🥛" },
