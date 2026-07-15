@@ -251,27 +251,27 @@
             font-size: 0.85rem;
         }
 
-        .color-gyros-pommes { background-color: #ffffff; }
-        .color-gyros-wecken,
-        .color-currywurst-pommes { background-color: #df7401; }
-        .color-maultaschen,
-        .color-steak-pommes { background-color: #0080ff; }
-        .color-steak-wecken { background-color: #8a4b08; color: #ffffff; }
-        .color-currywurst-wecken { background-color: #00d900; }
-        .color-wurst-wecken { background-color: #e00000; color: #ffffff; }
-        .color-pommes { background-color: #ffff00; }
-        .color-pfand { background-color: #ffbf00; }
+        .color-white { background-color: #ffffff; }
+        .color-dark-brown { background-color: #8a4b08; color: #ffffff; }
+        .color-light-brown { background-color: #df7401; }
+        .color-blue { background-color: #0080ff; }
+        .color-green { background-color: #00d900; }
+        .color-red { background-color: #e00000; color: #ffffff; }
+        .color-yellow { background-color: #ffff00; }
+
         .color-bier { background-color: #f6d365; }
         .color-radler { background-color: #b7e36d; }
         .color-alkoholfrei { background-color: #80cbc4; }
         .color-schorle { background-color: #ffcc80; }
         .color-softdrink { background-color: #90caf9; }
+        
+        .color-pfand { background-color: #ffbf00; }
         .color-becherpfand { background-color: #d7ccc8; }
         .color-flaschenpfand { background-color: #c5e1a5; }
         .color-pfand-zurueck { background-color: #eceff1; }
 
-        .color-steak-wecken .item-meta,
-        .color-wurst-wecken .item-meta {
+        .color-dark-brown .item-meta,
+        .color-red .item-meta {
             color: #ffffff;
         }
 
@@ -324,7 +324,7 @@
                 <select class="app-select" id="appSelector" aria-label="App-Version"></select>
                 <button type="button" id="zoomIn" aria-label="Ansicht vergrößern">+</button>
                 <button type="button" id="zoomOut" aria-label="Ansicht verkleinern">-</button>
-                <span class="version">V51</span>
+                <span class="version">V52</span>
             </div>
         </section>
 
@@ -355,15 +355,15 @@
                 orderLabel: "Bestellung Essen",
                 itemLabel: "Speisen",
                 items: [
-                    { id: "gyros-pommes", name: "Gyros mit Pommes, Zaziki und Weißkrautsalat", label: "Gyros Pommes", priceCents: 900, color: "color-gyros-pommes", depositItemId: "speiseteller" },
-                    { id: "gyros-wecken", name: "Gyros mit Wecken, Zaziki und Weißkrautsalat", label: "Gyros Wecken", priceCents: 700, color: "color-gyros-wecken" },
-                    { id: "steak-pommes", name: "Steak mit Pommes oder Kartoffelsalat", label: "Steak Pommes / Kartoffelsalat", priceCents: 800, color: "color-steak-pommes", depositItemId: "speiseteller" },
-                    { id: "steak-wecken", name: "Steak im Wecken", label: "Steak Wecken", priceCents: 500, color: "color-steak-wecken" },
-                    { id: "currywurst-pommes", name: "Currywurst mit Pommes", label: "Currywurst Pommes", priceCents: 700, color: "color-currywurst-pommes" },
-                    { id: "currywurst-wecken", name: "Currywurst mit Wecken", label: "Currywurst Wecken", priceCents: 450, color: "color-currywurst-wecken" },
-                    { id: "maultaschen", name: "Vegetarische Maultaschen mit Kartoffelsalat", label: "Maultaschen Kartoffelsalat", priceCents: 800, color: "color-maultaschen", depositItemId: "speiseteller" },
-                    { id: "wurst-wecken", name: "Rote/Weiße Wurst im Wecken", label: "Wurst Wecken", priceCents: 400, color: "color-wurst-wecken" },
-                    { id: "pommes", name: "Portion Pommes oder Kartoffelsalat", label: "Pommes / Kartoffelsalat", priceCents: 300, color: "color-pommes" }
+                    { id: "gyros-pommes", name: "Gyros mit Pommes, Zaziki und Weißkrautsalat", label: "Gyros Pommes", priceCents: 1000, color: "color-white", depositItemId: "speiseteller" },
+                    { id: "gyros-wecken", name: "Gyros mit Wecken, Zaziki und Weißkrautsalat", label: "Gyros Wecken", priceCents: 800, color: "color-blue" },
+                    { id: "steak-pommes", name: "Steak mit Pommes oder Kartoffelsalat", label: "Steak Pommes / Kartoffelsalat", priceCents: 900, color: "color-light-brown", depositItemId: "speiseteller" },
+                    { id: "steak-wecken", name: "Steak im Wecken", label: "Steak Wecken", priceCents: 550, color: "color-dark-brown" },
+                    { id: "currywurst-pommes", name: "Currywurst mit Pommes", label: "Currywurst Pommes", priceCents: 800, color: "color-blue" },
+                    { id: "currywurst-wecken", name: "Currywurst mit Wecken", label: "Currywurst Wecken", priceCents: 500, color: "color-green" },
+                    { id: "maultaschen", name: "Vegetarische Maultaschen mit Kartoffelsalat", label: "Maultaschen Kartoffelsalat", priceCents: 800, color: "color-blue", depositItemId: "speiseteller" },
+                    { id: "wurst-wecken", name: "Rote/Weiße Wurst im Wecken", label: "Wurst Wecken", priceCents: 400, color: "color-red" },
+                    { id: "pommes", name: "Portion Pommes oder Kartoffelsalat", label: "Pommes / Kartoffelsalat", priceCents: 300, color: "color-yellow" }
                 ],
                 depositItems: [
                     { id: "speiseteller", name: "Speiseteller inkl. Besteck", label: "Teller Besteck 🍽️", priceCents: 300, color: "color-pfand", icon: "🍽️️" }
