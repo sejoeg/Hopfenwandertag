@@ -259,19 +259,23 @@
         .color-red { background-color: #e00000; color: #ffffff; }
         .color-yellow { background-color: #ffff00; }
 
-        .color-bier-gross { background-color: #c5e1a5;; }
+        .color-bier-gross { background-color: #c5e1a5; }
         .color-bier-klein { background-color: #eceff1; }
-        .color-radler { background-color: #b7e36d; }
-        .color-alkoholfrei { background-color: #80cbc4; }
-        .color-schorle { background-color: #ffcc80; }
-        .color-softdrink { background-color: #90caf9; }
+        
+        .color-alkoholfrei-suess { background-color: #c5e1a5; }
+        .color-alkoholfrei-wasser { background-color: #eceff1; }
+        
+        .color-kuchen { background-color: #c5e1a5; }
+        .color-torte { background-color: #eceff1; }
+        .color-kaffee { background-color: #90caf9; }
 
         .color-geschirrpfand { background-color: #ffbf00; }
         .color-geschirrpfand-zurueck { background-color: #ffbf00; }
         .color-glaspfand { background-color: #d7ccc8; }
-        .color-flaschenpfand { background-color: #ffcc80; }
+        .color-flaschenpfand { background-color: #90caf9; }
         .color-glaspfand-zurueck { background-color: #d7ccc8; }
-        .color-flaschenpfand-zurueck { background-color: #ffcc80; }
+        .color-flaschenpfand-zurueck { background-color: #90caf9; }
+        .color-kuchenpfand { background-color: #ffcc80; }
 
         .color-dark-brown .item-meta,
         .color-red .item-meta {
@@ -327,7 +331,7 @@
                 <select class="app-select" id="appSelector" aria-label="App-Version"></select>
                 <button type="button" id="zoomIn" aria-label="Ansicht vergrößern">+</button>
                 <button type="button" id="zoomOut" aria-label="Ansicht verkleinern">-</button>
-                <span class="version">V58</span>
+                <span class="version">V60</span>
             </div>
         </section>
 
@@ -386,6 +390,34 @@
                     { id: "glaspfand", name: "Glaspfand", label: "Glaspfand 🥛", priceCents: 300, color: "color-glaspfand", icon: "🥛" }
                 ]
             },
+            alkoholfrei: {
+                title: "Hopfenwandertag 2026 - Alkoholfrei",
+                shortTitle: "HWT Alkoholfrei",
+                orderLabel: "Bestellung",
+                itemLabel: "Alkoholfrei",
+                items: [
+                    { id: "alkfrei-suess", name: "Apfelschorle / Fanta / Cola / Spezi", label: "Apfelschorle / Fanta / Cola / Spezi", priceCents: 300, color: "color-alkoholfrei-suess", depositItemId: "flaschenpfand" },
+                    { id: "wasser", name: "Mineralwasser", label: "Mineralwasser", priceCents: 250, color: "color-alkoholfrei-wasser", depositItemId: "flaschenpfand" },
+                    { id: "flasche-zurueck", name: "Flasche zurück", label: "Flasche zurück 🧴", priceCents: -100, color: "color-flaschenpfand-zurueck" }
+                ],
+                depositItems: [
+                    { id: "flaschenpfand", name: "Flaschenpfand", label: "Flaschenpfand 🧴", priceCents: 100, color: "color-flaschenpfand", icon: "🧴" }
+                ]
+            },
+            kaffee: {
+                title: "Hopfenwandertag 2026 - Kaffee & Kuchen",
+                shortTitle: "HWT Kaffee & Kuchen",
+                orderLabel: "Bestellung",
+                itemLabel: "Kaffee & Kuchen",
+                items: [
+                    { id: "kuchen", name: "Stück Kuchen", label: "Kuchen", priceCents: 300, color: "color-kuchen", depositItemId: "kuchenpfand" },
+                    { id: "torte", name: "Stück Torte", label: "Torte", priceCents: 350, color: "color-torte", depositItemId: "kuchenpfand" },
+                    { id: "kaffee", name: "Tasse Kaffee", label: "Kaffee", priceCents: 200, color: "color-kaffee", depositItemId: "kuchenpfand" }
+                ],
+                depositItems: [
+                    { id: "kuchenpfand", name: "Kuchenteller / Kaffeetasse mit Löffel/Gabel", label: "Teller / Tasse + Besteck 🍽️", priceCents: 100, color: "color-kuchenpfand", icon: "🍽️" }
+                ]
+            }/*,
             feierabendhock: {
                 title: "Feierabendhock 2026",
                 shortTitle: "Feierabendhock",
@@ -394,9 +426,9 @@
                 items: [
                     { id: "bier", name: "Bier 0,5 l", label: "Bier 0,5 l", priceCents: 400, color: "color-bier-gross", depositItemId: "glaspfand" },
                     { id: "radler", name: "Radler 0,5 l", label: "Radler 0,5 l", priceCents: 400, color: "color-radler", depositItemId: "glaspfand" },
-                    { id: "alkoholfrei", name: "Alkoholfreies Bier 0,5 l", label: "Alkoholfrei 0,5 l", priceCents: 400, color: "color-alkoholfrei", depositItemId: "glaspfand" },
+                    { id: "alkoholfrei", name: "Alkoholfreies Bier 0,5 l", label: "Alkoholfrei 0,5 l", priceCents: 400, color: "color-alkoholfrei-suess", depositItemId: "glaspfand" },
                     { id: "apfelschorle", name: "Apfelschorle 0,5 l", label: "Apfelschorle 0,5 l", priceCents: 300, color: "color-schorle", depositItemId: "flaschenpfand" },
-                    { id: "wasser", name: "Mineralwasser 0,5 l", label: "Wasser 0,5 l", priceCents: 250, color: "color-alkoholfrei", depositItemId: "flaschenpfand" },
+                    { id: "wasser", name: "Mineralwasser 0,5 l", label: "Wasser 0,5 l", priceCents: 250, color: "color-alkoholfrei-wasser", depositItemId: "flaschenpfand" },
                     { id: "spezi", name: "Spezi 0,5 l", label: "Spezi 0,5 l", priceCents: 300, color: "color-softdrink", depositItemId: "flaschenpfand" },
                     { id: "glas-zurueck", name: "Glas zurück", label: "Glas zurück", priceCents: -200, color: "color-glaspfand-zurueck" },
                     { id: "flasche-zurueck", name: "Flasche zurück", label: "Flasche zurück", priceCents: -100, color: "color-flaschenpfand-zurueck" }
@@ -405,7 +437,7 @@
                     { id: "glaspfand", name: "Glaspfand", label: "Glaspfand", priceCents: 200, color: "color-glaspfand", icon: "🥛" },
                     { id: "flaschenpfand", name: "Flaschenpfand", label: "Flaschenpfand", priceCents: 100, color: "color-flaschenpfand", icon: "↺" }
                 ]
-            }
+            }*/
         };
 
         const order = new Map();
