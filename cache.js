@@ -1,6 +1,6 @@
 const GHPATH = "/Hopfenwandertag";
 const APP_PREFIX = "hwt_";
-const VERSION = "version_067";
+const VERSION = "version_068";
 const CACHE_NAME = `${APP_PREFIX}${VERSION}`;
 const URLS = [
   `${GHPATH}/`,
