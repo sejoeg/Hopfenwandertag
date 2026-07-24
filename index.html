@@ -91,6 +91,7 @@
         }
 
         .item-button {
+            position: relative;
             display: grid;
             gap: 0.35rem;
             width: 100%;
@@ -100,6 +101,49 @@
             font-size: 1.5em;
             font-weight: 700;
             line-height: 1.15;
+        }
+
+        .item-button.item-added {
+            animation: item-added 180ms ease-out;
+        }
+
+        .item-count {
+            position: absolute;
+            right: 0.45rem;
+            bottom: 0.45rem;
+            display: none;
+            min-width: 1.65rem;
+            min-height: 1.65rem;
+            padding: 0.1rem 0.35rem;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            border-radius: 999px;
+            background: #111111;
+            color: #ffffff;
+            font-size: 0.55em;
+            font-weight: 800;
+            line-height: 1.2;
+            text-align: center;
+            align-content: center;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .item-count.is-visible {
+            display: grid;
+        }
+
+        @keyframes item-added {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+            45% {
+                transform: scale(0.97);
+                box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.85);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
         }
 
         .item-meta {
@@ -335,7 +379,7 @@
                 <select class="app-select" id="appSelector" aria-label="App-Version"></select>
                 <button type="button" id="zoomIn" aria-label="Ansicht vergrößern">+</button>
                 <button type="button" id="zoomOut" aria-label="Ansicht verkleinern">-</button>
-                <span class="version">V69</span>
+                <span class="version">V70</span>
             </div>
         </section>
 
@@ -599,6 +643,7 @@
 
             orderList.appendChild(fragment);
             orderTotalTop.textContent = `Gesamt: ${formatEuro(totalCents)}`;
+            updateItemCounts();
             calculateChange();
         }
 
@@ -636,6 +681,7 @@
                 const label = document.createElement("span");
                 const meta = document.createElement("span");
                 const price = document.createElement("span");
+                const count = document.createElement("span");
                 const depositItem = depositItemById.get(item.depositItemId);
 
                 button.type = "button";
@@ -647,13 +693,35 @@
                 price.textContent = `${formatEuro(item.priceCents)}${depositItem ? ` + ${depositItem.icon}` : ""}`;
                 meta.className = "item-meta";
                 meta.appendChild(price);
+                count.className = "item-count";
+                count.setAttribute("aria-hidden", "true");
 
-                button.append(label, meta);
+                button.append(label, meta, count);
                 wrapper.appendChild(button);
                 fragment.appendChild(wrapper);
             });
 
             itemList.appendChild(fragment);
+            updateItemCounts();
+        }
+
+        function updateItemCounts() {
+            itemList.querySelectorAll("[data-item-id]").forEach(button => {
+                const quantity = order.get(button.dataset.itemId) || 0;
+                const count = button.querySelector(".item-count");
+                if (!count) {
+                    return;
+                }
+
+                count.textContent = quantity;
+                count.classList.toggle("is-visible", quantity > 0);
+            });
+        }
+
+        function animateItemAdded(button) {
+            button.classList.remove("item-added");
+            void button.offsetWidth;
+            button.classList.add("item-added");
         }
 
         document.getElementById("resetOrder").addEventListener("click", resetOrder);
@@ -668,6 +736,7 @@
             const button = event.target.closest("[data-item-id]");
             if (button) {
                 addItem(button.dataset.itemId);
+                animateItemAdded(button);
             }
         });
         paidInput.addEventListener("input", calculateChange);
